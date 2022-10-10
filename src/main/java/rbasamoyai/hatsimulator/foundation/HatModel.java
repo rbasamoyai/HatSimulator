@@ -9,15 +9,22 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class HatModel extends HumanoidModel<LivingEntity> {
 
-	public HatModel(ModelPart root) { super(root); }
+	public HatModel(ModelPart root) {
+		super(root);
+	}
+	
+	protected float getScale() { return 1.25f; }
 	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vCons, int light, int overlay, float r, float g, float b, float a) {
+		float scale = this.getScale();
 		stack.pushPose();
 		if (this.young) stack.translate(0f, -0.1875f, 0f);
-		stack.translate(this.head.x / 16f, this.head.y / 16f, this.head.z / 16f);
-		stack.scale(1.25f, 1.25f, 1.25f);
-		stack.translate(-this.head.x / 16f, -this.head.y / 16f, -this.head.z / 16f);
+		stack.scale(0.0625f, 0.0625f, 0.0625f);
+		stack.translate(this.head.x, this.head.y, this.head.z);
+		stack.scale(scale, scale, scale);
+		stack.translate(-this.head.x, -this.head.y, -this.head.z);
+		stack.scale(16, 16, 16f);
 		super.renderToBuffer(stack, vCons, light, overlay, r, g, b, a);
 		stack.popPose();
 	}

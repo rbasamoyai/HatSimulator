@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rbasamoyai.hatsimulator.HatSimulator;
+import rbasamoyai.hatsimulator.items.VmfCapModel;
 
 @Mod.EventBusSubscriber(modid = HatSimulator.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class HatSimModelLayers {
@@ -22,7 +23,7 @@ public class HatSimModelLayers {
 	
 	@SubscribeEvent
 	public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(VMF_CAP, HatSimModels::rusFlotCap);
+		event.registerLayerDefinition(VMF_CAP, VmfCapModel::vmfCap);
 	}
 	
 }
