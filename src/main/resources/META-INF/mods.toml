@@ -1,0 +1,27 @@
+modLoader="javafml" 
+loaderVersion="[40,)"
+license="MIT License"
+issueTrackerURL="https://github.com/rbasamoyai/HatSimulator/issues"
+
+[[mods]]
+modId="hatsimulator"
+version="${file.jarVersion}"
+displayName="Hat Simulator"
+displayURL="https://github.com/rbasamoyai/HatSimulator"
+credits="Made by rbasamoyai" 
+authors="rbasamoyai"
+description='''An excuse to add various nice hat models to Minecraft'''
+
+[[dependencies.hatsimulator]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40.1.80,)"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.hatsimulator]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
