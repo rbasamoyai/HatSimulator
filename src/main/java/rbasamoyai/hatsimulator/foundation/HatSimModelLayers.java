@@ -12,6 +12,7 @@ import rbasamoyai.hatsimulator.items.VmfCapModel;
 public class HatSimModelLayers {
 
 	public static final ModelLayerLocation VMF_CAP = create("rus_flot_cap");
+	public static final ModelLayerLocation MARINE_NATIONALE_CAP = create("marine_nationale_cap");
 	
 	public static ModelLayerLocation create(String name) {
 		return create(name, "main");
@@ -22,8 +23,9 @@ public class HatSimModelLayers {
 	}
 	
 	@SubscribeEvent
-	public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(VMF_CAP, VmfCapModel::vmfCap);
+	public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions evt) {
+		evt.registerLayerDefinition(VMF_CAP, VmfCapModel::vmfCap);
+		evt.registerLayerDefinition(MARINE_NATIONALE_CAP, SimpleHatModels::marineNationaleCap);
 	}
 	
 }

@@ -9,11 +9,18 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class HatModel extends HumanoidModel<LivingEntity> {
 
-	public HatModel(ModelPart root) {
+	protected final float scale;
+	
+	public HatModel(ModelPart root, float scale) {
 		super(root);
+		this.scale = scale;
 	}
 	
-	protected float getScale() { return 1.25f; }
+	public HatModel(ModelPart root) {
+		this(root, 1.125f);
+	}
+	
+	protected float getScale() { return scale; }
 	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vCons, int light, int overlay, float r, float g, float b, float a) {

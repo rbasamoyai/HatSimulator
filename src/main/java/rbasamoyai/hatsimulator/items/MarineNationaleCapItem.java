@@ -12,12 +12,13 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import rbasamoyai.hatsimulator.HatSimulator;
+import rbasamoyai.hatsimulator.foundation.HatModel;
 import rbasamoyai.hatsimulator.foundation.HatSimModelLayers;
 
-public class VmfCapItem extends ArmorItem {
-
-	public VmfCapItem(ArmorMaterial armorMaterial, Properties properties) {
-		super(armorMaterial, EquipmentSlot.HEAD, properties);
+public class MarineNationaleCapItem extends ArmorItem {
+	
+	public MarineNationaleCapItem(ArmorMaterial material, Properties properties) {
+		super(material, EquipmentSlot.HEAD, properties);
 	}
 	
 	@Override
@@ -26,14 +27,14 @@ public class VmfCapItem extends ArmorItem {
 			@Override
 			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 				Minecraft mc = Minecraft.getInstance();
-				return new VmfCapModel(mc.getEntityModels().bakeLayer(HatSimModelLayers.VMF_CAP));
+				return new HatModel(mc.getEntityModels().bakeLayer(HatSimModelLayers.MARINE_NATIONALE_CAP));
 			}
 		});
 	}
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return HatSimulator.texture("vmf_cap");
+		return HatSimulator.texture("marine_nationale_cap");
 	}
-
+	
 }

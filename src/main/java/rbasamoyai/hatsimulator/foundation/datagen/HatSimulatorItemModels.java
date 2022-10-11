@@ -15,6 +15,7 @@ public class HatSimulatorItemModels extends ItemModelProvider {
 	@Override
 	protected void registerModels() {
 		this.basicItem(HatSimItems.VMF_CAP.get());
+		this.basicItem(HatSimItems.MARINE_NATIONALE_CAP.get());
 	}
 
 }

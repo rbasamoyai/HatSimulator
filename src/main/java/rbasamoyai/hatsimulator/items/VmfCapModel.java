@@ -32,7 +32,7 @@ public class VmfCapModel extends HatModel {
 		PartDefinition head = part.getChild("head");
 		PartDefinition cap = head.addOrReplaceChild("cap", CubeListBuilder.create()
 				.texOffs(0, 32).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 2.0F, 8.0F, CubeDeformation.NONE),
-				PartPose.offset(0, 0.0f, 0));
+				PartPose.ZERO);
 		
 		cap.addOrReplaceChild("peak", CubeListBuilder.create()
 				.texOffs(0, 49).addBox(-5.0F, -0.9375f, -6.0F, 10.0F, 2.0F, 12.0F, new CubeDeformation(0f, 0.1f, 0f)),
@@ -48,8 +48,6 @@ public class VmfCapModel extends HatModel {
 		
 		return LayerDefinition.create(mesh, 64, 64);
 	}
-	
-	@Override protected float getScale() { return 1.125f; }
 	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vCons, int light, int overlay, float r, float g, float b, float a) {

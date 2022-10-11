@@ -34,4 +34,8 @@ public class HatSimulator {
 		return new ResourceLocation(MOD_ID, path);
 	}
 	
+	public static String texture(String name) {
+		return MOD_ID + ":textures/models/armor/" + name + ".png";
+	}
+	
 }
