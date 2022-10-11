@@ -86,6 +86,10 @@ repositories {
         name = "Progwml6 maven"
         url = "https://modmaven.dev"
     }
+    maven {
+    	name = "Curse maven"
+    	url = "https://cursemaven.com"
+    }
 }
 
 dependencies {
@@ -94,6 +98,8 @@ dependencies {
     // JEI
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    
+    runtimeOnly fg.deobf("curse.maven:configuration-457570:4010624") // Configured
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
