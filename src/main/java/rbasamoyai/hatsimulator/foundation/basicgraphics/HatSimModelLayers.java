@@ -1,4 +1,4 @@
-package rbasamoyai.hatsimulator.foundation;
+package rbasamoyai.hatsimulator.foundation.basicgraphics;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import rbasamoyai.hatsimulator.HatSimulator;
+import rbasamoyai.hatsimulator.foundation.SimpleHatModels;
 import rbasamoyai.hatsimulator.items.VmfCapModel;
 
 @Mod.EventBusSubscriber(modid = HatSimulator.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

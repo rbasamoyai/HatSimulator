@@ -1,4 +1,4 @@
-package rbasamoyai.hatsimulator.foundation;
+package rbasamoyai.hatsimulator.foundation.basicgraphics;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

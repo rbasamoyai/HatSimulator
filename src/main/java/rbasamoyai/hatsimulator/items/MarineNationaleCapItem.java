@@ -12,8 +12,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import rbasamoyai.hatsimulator.HatSimulator;
-import rbasamoyai.hatsimulator.foundation.HatModel;
-import rbasamoyai.hatsimulator.foundation.HatSimModelLayers;
+import rbasamoyai.hatsimulator.foundation.basicgraphics.HatModel;
+import rbasamoyai.hatsimulator.foundation.basicgraphics.HatSimModelLayers;
 
 public class MarineNationaleCapItem extends ArmorItem {
 	

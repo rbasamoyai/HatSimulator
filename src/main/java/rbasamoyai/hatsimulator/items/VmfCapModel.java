@@ -1,8 +1,13 @@
 package rbasamoyai.hatsimulator.items;
 
+import javax.annotation.Nullable;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -11,19 +16,27 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.util.Mth;
-import rbasamoyai.hatsimulator.foundation.HatModel;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import rbasamoyai.hatsimulator.foundation.ClientUtil;
+import rbasamoyai.hatsimulator.foundation.basicgraphics.HatModel;
 import rbasamoyai.hatsimulator.foundation.config.HatSimConfig;
 
 public class VmfCapModel extends HatModel {
 
 	private final ModelPart tassels;
 	private final ModelPart tassels1;
+	private final String capText;
+	@Nullable private LivingEntity entity;
 	
-	public VmfCapModel(ModelPart root) {
+	public VmfCapModel(ModelPart root, LivingEntity entity, String capText) {
 		super(root);
 		this.tassels = root.getChild("head").getChild("cap").getChild("tassels");
 		this.tassels1 = this.tassels.getChild("tassels1");
+		this.capText = capText;
+		this.entity = entity;
 	}
 	
 	public static LayerDefinition vmfCap() {
@@ -51,7 +64,11 @@ public class VmfCapModel extends HatModel {
 	
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer vCons, int light, int overlay, float r, float g, float b, float a) {
-		if (HatSimConfig.CLIENT.simulatedArmorPartsEnabled.get()) {
+		Minecraft mc = Minecraft.getInstance();
+		boolean renderDetail = this.entity != null && ClientUtil.closeEnoughForDetail(this.entity);
+		if (renderDetail && HatSimConfig.CLIENT.simulatedArmorPartsEnabled.get()) {
+			this.tassels.visible = false;
+			
 			
 		} else {
 			float f = this.head.xRot;
@@ -61,6 +78,27 @@ public class VmfCapModel extends HatModel {
 			this.tassels1.xRot = f <= 0 ? 0 : f1 >= f2 ? -f : (float) Math.atan((double)(f2 - f1) / Math.sin(f)) - f;
 		}
 		super.renderToBuffer(stack, vCons, light, overlay, r, g, b, a);
+		this.tassels.visible = true;
+		
+		if (renderDetail && HatSimConfig.CLIENT.renderTextAtCloseDistances.get()) {
+			//this.head.render(stack, vCons, light, overlay);
+			Font font = mc.font;
+			float f = font.width(this.capText) - 1;
+			float f1 = f / 112f;
+			stack.pushPose();
+			stack.scale(0.005f / f1, 0.005f / f1, 0.005f / f1);
+			stack.mulPose(Vector3f.ZP.rotation(this.head.zRot));
+			stack.mulPose(Vector3f.YP.rotation(this.head.yRot));
+			stack.mulPose(Vector3f.XP.rotation(this.head.xRot));
+			float f2 = entity.getType() == EntityType.ARMOR_STAND ? 93 : 106;
+			if (this.entity.getType() == EntityType.ARMOR_STAND) {
+				
+			} else {
+				stack.translate(-f / 2, (-this.head.y - f2) * f1, -57 * f1);
+			}
+			font.draw(stack, this.capText, 0, 0, 16570144);
+			stack.popPose();
+		}
 	}
 	
 }

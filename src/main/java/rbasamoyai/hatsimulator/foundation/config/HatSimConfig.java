@@ -15,6 +15,8 @@ public class HatSimConfig {
 	public static class CClient {
 		public final BooleanValue simulatedArmorPartsEnabled;
 		
+		public final BooleanValue renderTextAtCloseDistances;
+		
 		CClient(ForgeConfigSpec.Builder builder) {
 			builder
 			.comment("Client-side config for Hat Simulator.")
@@ -24,6 +26,11 @@ public class HatSimConfig {
 				.comment("If certain features of hats (e.g. ribbons) should use cloth simulation.")
 				.translation(HatSimulator.MOD_ID + ".configgui.simulatedArmorPartsEnabled")
 				.define("simulatedArmorPartsEnabled", true);
+			
+			renderTextAtCloseDistances = builder
+				.comment("If certain hats should render text. Text will only be seen at close distances.")
+				.translation(HatSimulator.MOD_ID + ".configgui.renderTextAtCloseDistances")
+				.define("renderTextAtCloseDistances", true);
 			
 			builder.pop();
 		}
