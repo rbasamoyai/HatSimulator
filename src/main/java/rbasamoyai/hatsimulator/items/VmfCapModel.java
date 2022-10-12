@@ -86,6 +86,7 @@ public class VmfCapModel extends HatModel {
 			float f = font.width(this.capText) - 1;
 			float f1 = f / 112f;
 			stack.pushPose();
+			
 			stack.scale(0.005f / f1, 0.005f / f1, 0.005f / f1);
 			stack.mulPose(Vector3f.ZP.rotation(this.head.zRot));
 			stack.mulPose(Vector3f.YP.rotation(this.head.yRot));
