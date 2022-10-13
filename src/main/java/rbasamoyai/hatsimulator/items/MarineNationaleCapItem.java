@@ -12,8 +12,9 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import rbasamoyai.hatsimulator.HatSimulator;
-import rbasamoyai.hatsimulator.foundation.basicgraphics.HatModel;
+import rbasamoyai.hatsimulator.foundation.ClientUtil;
 import rbasamoyai.hatsimulator.foundation.basicgraphics.HatSimModelLayers;
+import rbasamoyai.hatsimulator.foundation.config.HatSimConfig;
 
 public class MarineNationaleCapItem extends ArmorItem {
 	
@@ -27,14 +28,15 @@ public class MarineNationaleCapItem extends ArmorItem {
 			@Override
 			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 				Minecraft mc = Minecraft.getInstance();
-				return new HatModel(mc.getEntityModels().bakeLayer(HatSimModelLayers.MARINE_NATIONALE_CAP));
+				String capText = itemStack.hasCustomHoverName() ? itemStack.getHoverName().getString() : "MARINE NATIONALE";
+				return new MarineNationaleCapModel(mc.getEntityModels().bakeLayer(HatSimModelLayers.MARINE_NATIONALE_CAP), entityLiving, capText);
 			}
 		});
 	}
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return HatSimulator.texture("marine_nationale_cap");
+		return HatSimulator.texture("marine_nationale_cap" + (HatSimConfig.CLIENT.renderTextAtCloseDistances.get() && ClientUtil.closeEnoughForDetail(entity) ? "_text" : ""));
 	}
 	
 }

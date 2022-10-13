@@ -16,7 +16,6 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -86,7 +85,6 @@ public class VmfCapModel extends HatModel {
 		this.tassels.visible = true;
 		
 		if (renderDetail && HatSimConfig.CLIENT.renderTextAtCloseDistances.get()) {
-			//this.head.render(stack, vCons, light, overlay);
 			Font font = mc.font;
 			float f = font.width(this.capText) - 1;
 			float f1 = Math.max(f / 112f, 1);
@@ -100,15 +98,16 @@ public class VmfCapModel extends HatModel {
 			
 			boolean armorStand = this.entity.getType() == EntityType.ARMOR_STAND;
 			if (armorStand) stack.translate(0, 0.0625, 0);
+			float f3 = 0.005f / f1;			
 			
-			stack.scale(0.005f / f1, 0.005f / f1, 0.005f / f1);
+			stack.scale(f3, f3, f3);
 			stack.mulPose(Vector3f.ZP.rotation(this.head.zRot));
 			stack.mulPose(Vector3f.YP.rotation(this.head.yRot));
 			stack.mulPose(Vector3f.XP.rotation(this.head.xRot));
 			
 			if (armorStand) stack.translate(0, -12, 0);
 			
-			float f2 = entity.getType() == EntityType.ARMOR_STAND ? 93 : 106;
+			float f2 = armorStand ? 93 : 106;
 			stack.translate(-f / 2, (-this.head.y - f2) * f1, -56.5 * f1);
 			font.draw(stack, this.capText, 0, 0, 16570144);
 			stack.popPose();
