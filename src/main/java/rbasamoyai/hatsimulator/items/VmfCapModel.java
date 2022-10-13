@@ -77,15 +77,26 @@ public class VmfCapModel extends HatModel {
 			float f2 = 2f / 3f;
 			this.tassels1.xRot = f <= 0 ? 0 : f1 >= f2 ? -f : (float) Math.atan((double)(f2 - f1) / Math.sin(f)) - f;
 		}
+		stack.pushPose();
+		if (this.young) {
+			stack.translate(0, 3f / 32f, 0);
+		}
 		super.renderToBuffer(stack, vCons, light, overlay, r, g, b, a);
+		stack.popPose();
 		this.tassels.visible = true;
 		
 		if (renderDetail && HatSimConfig.CLIENT.renderTextAtCloseDistances.get()) {
 			//this.head.render(stack, vCons, light, overlay);
 			Font font = mc.font;
 			float f = font.width(this.capText) - 1;
-			float f1 = f / 112f;
+			float f1 = Math.max(f / 112f, 1);
 			stack.pushPose();
+			
+			if (this.young) {
+				float f2 = 1.5f / 2f;
+				stack.scale(f2, f2, f2);
+				stack.translate(0, 1, 0);
+			}
 			
 			stack.scale(0.005f / f1, 0.005f / f1, 0.005f / f1);
 			stack.mulPose(Vector3f.ZP.rotation(this.head.zRot));
