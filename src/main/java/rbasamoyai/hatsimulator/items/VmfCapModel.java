@@ -98,16 +98,18 @@ public class VmfCapModel extends HatModel {
 				stack.translate(0, 1, 0);
 			}
 			
+			boolean armorStand = this.entity.getType() == EntityType.ARMOR_STAND;
+			if (armorStand) stack.translate(0, 0.0625, 0);
+			
 			stack.scale(0.005f / f1, 0.005f / f1, 0.005f / f1);
 			stack.mulPose(Vector3f.ZP.rotation(this.head.zRot));
 			stack.mulPose(Vector3f.YP.rotation(this.head.yRot));
 			stack.mulPose(Vector3f.XP.rotation(this.head.xRot));
+			
+			if (armorStand) stack.translate(0, -12, 0);
+			
 			float f2 = entity.getType() == EntityType.ARMOR_STAND ? 93 : 106;
-			if (this.entity.getType() == EntityType.ARMOR_STAND) {
-				
-			} else {
-				stack.translate(-f / 2, (-this.head.y - f2) * f1, -57 * f1);
-			}
+			stack.translate(-f / 2, (-this.head.y - f2) * f1, -56.5 * f1);
 			font.draw(stack, this.capText, 0, 0, 16570144);
 			stack.popPose();
 		}
