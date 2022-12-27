@@ -15,8 +15,23 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
 
-version = '${mc_version}-${hatsimulator_version}'
+version = "${mc_version}-${hatsimulator_version}"
+if (System.getenv("DEV") == "true") {
+    version = "${mc_version}-${hatsimulator_version}-dev-${getGitHash()}"
+}
+if (System.getenv("CI") == "true") {
+    version = "${mc_version}-nightly-${getGitHash()}";
+}
+
 group = 'rbasamoyai.hatsimulator'
 archivesBaseName = 'modid'
 
